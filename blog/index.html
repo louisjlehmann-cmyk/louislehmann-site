@@ -1,3 +1,166 @@
-<h1>Blog</h1>
-<p>Coming soon.</p>
-<p><a href="/">← Back home</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Louis Lehmann — Blog</title> 
+  <h1>Blog</h1>
+<p class="subtitle">Short-form thinking, notes, and writeups.</p>
+  <meta name="description" content="Louis Lehmann — personal site section" />
+
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --border: #e2e8f0;
+      --chip-bg: #f1f5f9;
+      --chip-text: #475569;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --radius: 14px;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --border: #334155;
+      --chip-bg: #334155;
+      --chip-text: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.55;
+      padding: 2rem 1rem;
+    }
+
+    .container { max-width: 780px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-left: 0.75rem;
+    }
+    .nav a:hover { color: var(--text-primary); }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .chip {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--chip-bg);
+      font-size: 0.75rem;
+      color: var(--chip-text);
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <strong>Louis Lehmann</strong>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/resume/">Resume</a>
+      </nav>
+    </header>
+
+    <main class="card">
+      <h1>Blog</h1> <!-- 🔧 change -->
+      <p class="subtitle">
+        Short-form thinking, notes, and writeups.
+      </p> <!-- 🔧 change -->
+
+      <div class="chips">
+        <span class="chip">In progress</span>
+        <span class="chip">Iterative</span>
+        <span class="chip">No CMS yet</span>
+      </div>
+
+      <p>
+        This section will grow organically.  
+        First milestone: one real post worth linking to.
+      </p>
+
+      <p class="muted">
+        Built static on purpose — complexity comes later.
+      </p>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Louis Lehmann</span>
+      <span>Static-first · Vercel · GitHub</span>
+    </footer>
+  </div>
+
+  <script>
+    document.body.setAttribute(
+      "data-theme",
+      localStorage.getItem("theme") || "light"
+    );
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
