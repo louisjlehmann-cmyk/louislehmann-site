@@ -1,3 +1,1180 @@
-<h1>Lab</h1>
-<p>Coming soon.</p>
-<p><a href="/">← Back home</a></p>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vancouver Tennis Rentals - Ball Machine Delivery</title>
+    <meta name="description" content="Rent a tennis ball machine in Vancouver, WA. Delivered to your court. $50 for 2 hours including delivery, setup, and pickup.">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 1.5rem;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #059669;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 5rem 0 4rem;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0fdf9 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .hero-text .subhead {
+            font-size: 1.25rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .price-pill {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #059669;
+            border: 2px solid #059669;
+        }
+
+        .btn-secondary:hover {
+            background: #f0fdf9;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        /* ===== SOCIAL PROOF ===== */
+        .social-proof {
+            background: white;
+            padding: 2rem 0;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .social-proof-content {
+            text-align: center;
+        }
+
+        .perfect-for {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            border-left: 4px solid #059669;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .example-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            background: #fafafa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #0f172a;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            background: #d1fae5;
+            color: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .step-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .step-note {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: #f0fdf9;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #047857;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing {
+            background: white;
+        }
+
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid #059669;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.15);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-duration {
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #059669;
+            font-weight: 700;
+        }
+
+        .pricing-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* ===== BOOKING FORM ===== */
+        .booking {
+            background: #fafafa;
+        }
+
+        .booking-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .form-required {
+            color: #ef4444;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.25rem;
+            cursor: pointer;
+            accent-color: #059669;
+        }
+
+        .form-checkbox-label {
+            flex: 1;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #374151;
+        }
+
+        .form-error {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1.125rem;
+            margin-top: 1rem;
+        }
+
+        .what-happens-next {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f0fdf9;
+            border-radius: 8px;
+            border-left: 4px solid #059669;
+        }
+
+        .what-happens-next h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #047857;
+        }
+
+        .what-happens-next p {
+            font-size: 0.9rem;
+            color: #065f46;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 0;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: #059669;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+            font-size: 1.5rem;
+            color: #059669;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer-content {
+            padding-bottom: 1.5rem;
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a1a1a;
+            color: #d1d5db;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #374151;
+        }
+
+        .footer-link {
+            color: #10b981;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #34d399;
+        }
+
+        /* ===== STICKY MOBILE CTA ===== */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 90;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .mobile-cta .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ===== TOAST MESSAGE ===== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 200;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 3rem 0 2rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subhead {
+                font-size: 1.05rem;
+            }
+
+            .hero-visual {
+                min-height: 300px;
+                padding: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-amount {
+                font-size: 2.5rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .mobile-cta {
+                display: block;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Vancouver Tennis Rentals</a>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How it works</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#book">Book</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Tennis ball machine — delivered to your court</h1>
+                    <p class="subhead">Solo or couple practice. Fully charged. Fresh balls. Drop-off + pickup included.</p>
+                    <div class="price-pill">$50 • 2 hours • Vancouver, WA</div>
+                    <div class="hero-buttons">
+                        <a href="#book" class="btn btn-primary">Check availability</a>
+                        <a href="#how-it-works" class="btn btn-secondary">How it works</a>
+                    </div>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                                <path d="M9 11l3 3L22 4"></path>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                            </svg>
+                            <span>Delivery included</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                            </svg>
+                            <span>Charged & ready</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                            <span>Fresh balls</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                                <path d="M12 2v20M2 12h20"></path>
+                            </svg>
+                            <span>Easy setup</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- Tennis Ball SVG -->
+                    <svg width="200" height="200" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="95" fill="#DFFF00" stroke="#fff" stroke-width="3"/>
+                        <path d="M 30 100 Q 100 60, 170 100" fill="none" stroke="#fff" stroke-width="4"/>
+                        <path d="M 30 100 Q 100 140, 170 100" fill="none" stroke="#fff" stroke-width="4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="social-proof-content">
+                <p class="perfect-for"><strong>Perfect for:</strong> beginners, intermediates, couples, solo sessions</p>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Game changer for my practice routine. Delivery was punctual and setup took 2 minutes. The machine was clean, charged, and worked perfectly."</p>
+                    <p class="testimonial-author">— Sarah M., Vancouver <span class="example-badge">EXAMPLE</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <h2 class="section-title">How it works</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Choose time & court</h3>
+                    <p class="step-description">Pick your preferred date, time, and court address. We deliver within ~25 minutes of Vancouver, WA.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Pay & confirm</h3>
+                    <p class="step-description">Secure payment via Stripe. You'll receive confirmation by text or email with all details.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Drop-off + pickup</h3>
+                    <p class="step-description">I'll deliver the machine, help with quick setup, and return to pick it up after your session.</p>
+                    <div class="step-note">No oscillation—consistent feeds for reps and form.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section pricing">
+        <div class="container">
+            <h2 class="section-title">Simple pricing</h2>
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <div class="pricing-amount">$50</div>
+                    <div class="pricing-duration">2 hours</div>
+                </div>
+                <ul class="pricing-features">
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Delivery within 25 minutes of Vancouver, WA</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Fully charged machine</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Fresh tennis balls included</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Quick setup assistance</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span>Pickup after session</span>
+                    </li>
+                </ul>
+                <p class="pricing-note">Longer sessions available by request</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section id="book" class="section booking">
+        <div class="container">
+            <div class="booking-container">
+                <h2 class="section-title">Book your session</h2>
+                <div class="form-card">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full name <span class="form-required">*</span></label>
+                            <input type="text" id="fullName" class="form-input" required>
+                            <div class="form-error" id="fullNameError">Please enter your full name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email <span class="form-required">*</span></label>
+                            <input type="email" id="email" class="form-input" required>
+                            <div class="form-error" id="emailError">Please enter a valid email</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone <span class="form-required">*</span></label>
+                            <input type="tel" id="phone" class="form-input" required>
+                            <div class="form-error" id="phoneError">Please enter your phone number</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="date">Preferred date <span class="form-required">*</span></label>
+                            <input type="date" id="date" class="form-input" required>
+                            <div class="form-error" id="dateError">Please select a date</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="time">Preferred start time <span class="form-required">*</span></label>
+                            <select id="time" class="form-select" required>
+                                <option value="">Select a time</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                            <div class="form-error" id="timeError">Please select a time</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="address">Court address <span class="form-required">*</span></label>
+                            <input type="text" id="address" class="form-input" placeholder="e.g., 123 Main St, Vancouver, WA 98660" required>
+                            <div class="form-error" id="addressError">Please enter the court address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="notes">Notes (optional)</label>
+                            <textarea id="notes" class="form-textarea" placeholder="Any special requests or details..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-checkbox-group">
+                                <input type="checkbox" id="terms" class="form-checkbox" required>
+                                <label for="terms" class="form-checkbox-label">I agree to the rental terms & safety guidelines <span class="form-required">*</span></label>
+                            </div>
+                            <div class="form-error" id="termsError">You must agree to the terms to continue</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit">Pay & Book</button>
+                    </form>
+
+                    <div class="what-happens-next">
+                        <h4>What happens next?</h4>
+                        <p>You'll receive a confirmation email/text and I'll coordinate drop-off details with you before your session.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="faq-container">
+                <h2 class="section-title">Frequently asked questions</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What's your weather policy?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            If it's raining on your scheduled date, we'll provide a full reschedule credit. Just text or email as soon as possible and we'll find a new time that works for you.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I use the machine at any court?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, as long as the court allows ball machines. Most public courts in the Vancouver area permit them. Please check your specific court's rules before booking.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What are the safety guidelines?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Do not aim the machine at people. Always supervise the machine while it's in use. Keep children and pets at a safe distance. Use common sense and treat the equipment with care.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is there a deposit required?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            A small refundable deposit or card hold may be required for first-time renters. This will be discussed during booking confirmation.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What's your cancellation policy?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Cancel at least 24 hours in advance for a full refund. Cancellations within 24 hours can be rescheduled to a future date (no refund, but you keep your booking credit).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What's included? What should I bring?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Included: Fully charged ball machine, fresh tennis balls, delivery, setup, and pickup. You bring: Your racquet, water, and enthusiasm. We handle the rest.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">Vancouver Tennis Rentals</h3>
+                <p class="footer-text">Serving courts within ~25 minutes of 9705 NE 26th Pl, Vancouver, WA</p>
+                <div class="footer-contact">
+                    <p class="footer-text">Questions? Text <a href="tel:+15551234567" class="footer-link">(555) 123-4567</a></p>
+                    <p class="footer-text">Follow us <a href="https://instagram.com/" class="footer-link" target="_blank">@VancouverTennisRentals</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-cta">
+        <a href="#book" class="btn btn-primary">Book now — $50</a>
+    </div>
+
+    <!-- Toast Message -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===== SET MIN DATE ON DATE PICKER =====
+        (function setMinDate() {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        })();
+
+        // ===== FAQ ACCORDION =====
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // ===== FORM VALIDATION & SUBMISSION =====
+        const form = document.getElementById('bookingForm');
+        const STRIPE_CHECKOUT_URL = "https://checkout.stripe.com/pay/cs_test_REPLACE_ME";
+
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+
+        function hideError(fieldId) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            errorElement.classList.remove('show');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const re = /^[\d\s\-\(\)\+]+$/;
+            return phone.length >= 10 && re.test(phone);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Clear all errors
+            ['fullName', 'email', 'phone', 'date', 'time', 'address', 'terms'].forEach(hideError);
+
+            let isValid = true;
+
+            // Validate full name
+            const fullName = document.getElementById('fullName').value.trim();
+            if (!fullName || fullName.length < 2) {
+                showError('fullName', 'Please enter your full name');
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            if (!email || !validateEmail(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate phone
+            const phone = document.getElementById('phone').value.trim();
+            if (!phone || !validatePhone(phone)) {
+                showError('phone', 'Please enter a valid phone number');
+                isValid = false;
+            }
+
+            // Validate date
+            const date = document.getElementById('date').value;
+            if (!date) {
+                showError('date', 'Please select a date');
+                isValid = false;
+            }
+
+            // Validate time
+            const time = document.getElementById('time').value;
+            if (!time) {
+                showError('time', 'Please select a start time');
+                isValid = false;
+            }
+
+            // Validate address
+            const address = document.getElementById('address').value.trim();
+            if (!address || address.length < 5) {
+                showError('address', 'Please enter the full court address');
+                isValid = false;
+            }
+
+            // Validate terms checkbox
+            const terms = document.getElementById('terms').checked;
+            if (!terms) {
+                showError('terms', 'You must agree to the rental terms to continue');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                showToast('Please fix the errors above');
+                return;
+            }
+
+            // Get optional notes
+            const notes = document.getElementById('notes').value.trim();
+
+            // Build querystring for Stripe (simulated metadata)
+            const params = new URLSearchParams({
+                client_reference_id: `booking_${Date.now()}`,
+                prefilled_email: email,
+                customer_name: fullName,
+                customer_phone: phone,
+                booking_date: date,
+                booking_time: time,
+                court_address: address,
+                notes: notes
+            });
+
+            // Redirect to Stripe Checkout
+            window.location.href = `${STRIPE_CHECKOUT_URL}?${params.toString()}`;
+        });
+
+        // ===== SMOOTH SCROLL FOR INTERNAL LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('.nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== REAL-TIME VALIDATION FEEDBACK =====
+        const inputs = form.querySelectorAll('.form-input, .form-select, .form-checkbox');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                const id = input.id;
+                hideError(id);
+            });
+        });
+    </script>
+</body>
+</html>
+```
