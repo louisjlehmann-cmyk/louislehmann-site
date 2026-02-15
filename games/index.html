@@ -1,3 +1,194 @@
-<h1>Games</h1>
-<p>Coming soon.</p>
-<p><a href="/">← Back home</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louis Lehmann — Games</title>
+  <meta name="description" content="Louis Lehmann — Browser experiments and tiny games." />
+  <meta property="og:title" content="Louis Lehmann — Games" />
+  <meta property="og:description" content="Browser experiments and tiny games." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://louislehmann.com/games/" />
+
+  <style>
+    :root {
+      --color-bg: #fafbfc;
+      --color-surface: #ffffff;
+      --color-text-1: #1a1a2e;
+      --color-text-2: #555770;
+      --color-text-3: #8b8da3;
+      --color-accent: #0055d4;
+      --color-border: #e0e2e9;
+      --color-border-subtle: #eff0f3;
+      --color-chip-bg: #f2f3f7;
+      --color-chip-text: #555770;
+      --color-glow: rgba(0, 85, 212, 0.06);
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --fs-h1: clamp(1.75rem, 3.5vw, 2.25rem);
+      --fs-body: clamp(0.925rem, 1.5vw, 1rem);
+      --fs-small: clamp(0.8rem, 1.2vw, 0.875rem);
+      --fs-xs: 0.75rem;
+      --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px;
+      --r-m: 14px; --r-full: 999px;
+      --shadow-s: 0 1px 2px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03);
+      --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --duration: 200ms;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #0b0b14;
+      --color-surface: #16162a;
+      --color-text-1: #f0f0f5;
+      --color-text-2: #a0a0b8;
+      --color-text-3: #6b6b85;
+      --color-accent: #4d8eff;
+      --color-border: #2a2a42;
+      --color-border-subtle: #1e1e34;
+      --color-chip-bg: #1e1e38;
+      --color-chip-text: #a0a0b8;
+      --color-glow: rgba(77, 142, 255, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text-1);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 300ms var(--ease-out), color 300ms var(--ease-out);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -40%; left: 50%;
+      transform: translateX(-50%);
+      width: 80%; height: 60%;
+      background: radial-gradient(ellipse, var(--color-glow) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(250, 251, 252, 0.8);
+      border-bottom: 1px solid var(--color-border-subtle);
+      transition: background 300ms var(--ease-out);
+    }
+    [data-theme="dark"] .site-nav { background: rgba(11, 11, 20, 0.8); }
+
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 var(--sp-5);
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+
+    .nav-brand {
+      font-weight: 700; font-size: var(--fs-body);
+      color: var(--color-text-1); text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: var(--sp-5); list-style: none;
+    }
+
+    .nav-links a {
+      font-size: var(--fs-small); font-weight: 500;
+      color: var(--color-text-2); text-decoration: none;
+      transition: color var(--duration) var(--ease-out);
+    }
+    .nav-links a:hover { color: var(--color-text-1); }
+    .nav-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+
+    .container {
+      max-width: 720px; margin: 0 auto; padding: var(--sp-7) var(--sp-5);
+      position: relative; z-index: 1;
+    }
+
+    h1 {
+      font-size: var(--fs-h1); font-weight: 800;
+      letter-spacing: -0.03em; margin-bottom: var(--sp-3);
+    }
+
+    .subtitle {
+      color: var(--color-text-2); font-size: var(--fs-body);
+      margin-bottom: var(--sp-5); max-width: 480px;
+    }
+
+    .card {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--r-m); padding: var(--sp-6); box-shadow: var(--shadow-s);
+      text-align: center;
+    }
+
+    .card-text {
+      color: var(--color-text-3); font-size: var(--fs-body);
+    }
+
+    .back-link {
+      display: inline-block; margin-top: var(--sp-5);
+      color: var(--color-accent); text-decoration: none;
+      font-size: var(--fs-small); font-weight: 600;
+      transition: opacity var(--duration) var(--ease-out);
+    }
+    .back-link:hover { opacity: 0.8; }
+    .back-link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+
+    .site-footer {
+      border-top: 1px solid var(--color-border-subtle);
+      padding: var(--sp-6) 0; margin-top: var(--sp-7);
+    }
+
+    .footer-inner {
+      max-width: 720px; margin: 0 auto; padding: 0 var(--sp-5);
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: var(--sp-4); font-size: var(--fs-xs); color: var(--color-text-3);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Louis Lehmann</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/resume/">Resume</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/lab/">Lab</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Games</h1>
+    <p class="subtitle">Browser experiments — learn by shipping.</p>
+
+    <div class="card">
+      <p class="card-text">Coming soon.</p>
+      <a href="/" class="back-link">&larr; Back home</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Louis Lehmann</span>
+      <span>Static-first</span>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (!saved) saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
