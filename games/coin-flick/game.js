@@ -29,6 +29,8 @@ const ui={
   ovS:document.getElementById('overlaySub'),
   again:document.getElementById('playAgainBtn'),
   rematch:document.getElementById('rematchBtn'),
+  aiModeBtn: document.getElementById('aiModeBtn'),
+
 };
 
 // Audio (procedural)
@@ -98,7 +100,16 @@ let fly=[],fall=[],burst=[];
 let matchId=0,aiTimer=0;
 let drag={on:false,pid:null,sx:0,sy:0,x:0,y:0};
 let toastT=0;
-const opt={proj:true};
+const opt = { proj: true, aiMode: 'Medium' };
+
+const AI_MODES = ['Easy', 'Medium', 'Difficult', 'Ludicrous'];
+const AI_ACCURACY = {
+  Easy: 0.30,
+  Medium: 0.50,
+  Difficult: 0.80,
+  Ludicrous: 0.95
+};
+
 
 let rand=mulberry32(SEED);
 const rnd=()=>rand();
@@ -234,6 +245,17 @@ function updateUI(){
   ui.projBtn.classList.toggle('toggleOn',opt.proj);
   ui.sndBtn.textContent=`Sound: ${S.enabled?'On':'Off'}`;
   ui.sndBtn.classList.toggle('toggleOn',S.enabled);
+  if (ui.aiModeBtn) ui.aiModeBtn.textContent = `AI: ${opt.aiMode}`;
+
+  ui.aiModeBtn?.addEventListener('click', () => {
+  S.unlock();
+  const i = AI_MODES.indexOf(opt.aiMode);
+  opt.aiMode = AI_MODES[(i + 1) % AI_MODES.length];
+  toast(`AI mode: ${opt.aiMode}`, 'neutral', 0.9);
+  updateUI();
+});
+
+  
 }
 
 function newMatch(seed,upd=true){
@@ -465,15 +487,58 @@ function aiShoot(){
     if(sc)setActive(sc.id);
   }
   if(!sc){endTurn('p');return;}
-  const plan=aiPlan(sc);
-  if(!plan){
-    const cen=tableCenter();const dx=cen.x-sc.x,dy=cen.y-sc.y;const d=Math.hypot(dx,dy)||1;
-    let dirx=dx/d,diry=dy/d;
-    const ang=(rnd()-0.5)*0.08,cs=Math.cos(ang),sn=Math.sin(ang);
-    const jx=dirx*cs-diry*sn,jy=dirx*sn+diry*cs;
-    const v0=POWER*22;
-    beginShot(sc,jx*v0,jy*v0,'a');
-    return;
+const plan = aiPlan(sc);
+
+// Determine if AI "plays its best" this shot
+const acc = AI_ACCURACY[opt.aiMode] ?? 0.5;
+const playBest = rnd() < acc;
+
+if (!plan) {
+  // No good plan found -> do a safe-ish center tap
+  const cen = tableCenter();
+  const dx = cen.x - sc.x, dy = cen.y - sc.y;
+  const d = Math.hypot(dx, dy) || 1;
+  let dirx = dx / d, diry = dy / d;
+
+  // Difficulty affects wobble here too
+  const wob = playBest ? 0.03 : 0.10;
+  const ang = (rnd() - 0.5) * wob;
+  const cs = Math.cos(ang), sn = Math.sin(ang);
+  const jx = dirx * cs - diry * sn, jy = dirx * sn + diry * cs;
+
+  const v0 = POWER * (playBest ? 26 : 18);
+  beginShot(sc, jx * v0, jy * v0, 'a');
+  return;
+}
+
+// If not playing best, deliberately degrade: pick a weaker/less optimal plan
+let dirx = plan.dirx, diry = plan.diry, dragLen = plan.dragLen;
+
+if (!playBest) {
+  // 1) increase wobble a lot
+  // 2) under/over-power with higher variance
+  // 3) occasionally shoot toward a random coin instead of the planned target direction
+  if (rnd() < 0.35) {
+    const other = coins[(rnd() * coins.length) | 0];
+    if (other && other.id !== sc.id) {
+      const dx = other.x - sc.x, dy = other.y - sc.y;
+      const d = Math.hypot(dx, dy) || 1;
+      dirx = dx / d; diry = dy / d;
+    }
+  }
+  dragLen = clamp(dragLen * lerp(0.65, 1.25, rnd()), 10, MAX_DRAG);
+}
+
+const wobBase = playBest ? lerp(0.02, 0.07, rnd()) : lerp(0.09, 0.18, rnd());
+const ang = (rnd() - 0.5) * wobBase;
+const cs = Math.cos(ang), sn = Math.sin(ang);
+const wx = dirx * cs - diry * sn, wy = dirx * sn + diry * cs;
+
+const powJitter = playBest ? lerp(0.94, 1.03, rnd()) : lerp(0.75, 1.25, rnd());
+const v0 = POWER * dragLen * powJitter;
+
+beginShot(sc, wx * v0, wy * v0, 'a');
+
   }
   let {dirx,diry,dragLen}=plan;
   const wob=lerp(0.02,0.09,rnd());
