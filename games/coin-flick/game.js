@@ -595,11 +595,6 @@ ui.rematch.addEventListener('click',()=>{S.unlock();ui.ov.classList.add('hidden'
 window.addEventListener('pointerdown',()=>S.unlock(),{once:true,capture:true});
 window.addEventListener('resize',resize);
 
-// Effects stepping
-function stepFx(dt){
-  for(let i=fly.length-1;i>=0;i--){const a=fly[i];a.t+=dt;if(a.t>=a.d){if(a.done)a.done();fly.splice(i,1);}}
-  for(let i=fall.length-1;i>=0;i--){const f=fall[i];f.t+=dt;if(f.t>=f.d)fall.splice(i,1);}
-  for(let i=burst.length-1;i>=0;i--){const b=burst[i];b.t+=dt;if(b.t>=b.d)burst.splice(i,1);}
 }
 
 // Rendering
