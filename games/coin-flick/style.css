@@ -9,6 +9,35 @@ a:focus-visible{outline:2px solid var(--ui-focus);outline-offset:3px;border-radi
 .backLink{position:fixed;top:12px;left:12px;z-index:30;text-decoration:none;font-weight:750;font-size:13px;padding:10px 12px;border-radius:var(--radius);background:var(--ui-bg);border:1px solid var(--ui-border);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%)}
 .backLink:hover{opacity:.92}
 .hud{position:fixed;inset:0;z-index:20;pointer-events:none}
+.centerBlock{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding:0 2px;
+}
+
+.miniToggle{
+  cursor:pointer;
+  pointer-events:auto;
+  font:inherit;
+  color:rgba(245,245,255,.92);
+  background:rgba(10,10,18,.40);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.01em;
+  backdrop-filter:blur(12px) saturate(140%);
+  -webkit-backdrop-filter:blur(12px) saturate(140%);
+  transition:transform 120ms ease-out, opacity 120ms ease-out, border-color 120ms ease-out;
+}
+
+.miniToggle:hover{opacity:.92;border-color:rgba(255,255,255,.22)}
+.miniToggle:active{transform:translateY(1px)}
+.miniToggle:focus-visible{outline:2px solid var(--ui-focus);outline-offset:3px}
+
 .scoreboard{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:var(--radius);background:var(--ui-bg);border:1px solid var(--ui-border);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);pointer-events:auto}
 .score{display:flex;flex-direction:column;align-items:center;min-width:84px}
 .score .label{font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--ui-muted)}
@@ -37,5 +66,14 @@ button.toggleOn{border-color:rgba(255,210,120,.36)}
 .overlayCard p{margin:0 0 14px;color:var(--ui-muted);font-size:14px;line-height:1.4}
 .overlayBtns{display:flex;flex-wrap:wrap;gap:10px}
 .overlayBtns button{flex:1 1 auto}
-@media (max-width:420px){.scoreboard{gap:10px;padding:9px 10px}.score{min-width:74px}.centerTitle{display:none}.bottomRight{right:10px;bottom:10px}.bottomLeft{left:10px;bottom:10px}.backLink{top:10px;left:10px;padding:9px 10px}}
+@media (max-width:420px){
+  .scoreboard{gap:10px;padding:9px 10px}
+  .score{min-width:74px}
+  .centerTitle{display:none}
+  .miniToggle{font-size:12px;padding:6px 10px}
+  .bottomRight{right:10px;bottom:10px}
+  .bottomLeft{left:10px;bottom:10px}
+  .backLink{top:10px;left:10px;padding:9px 10px}
+}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
