@@ -1,1 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Coin Flick</title>
+  <meta name="description" content="A tactile tabletop coin-flick duel vs AI with strict fouls and chain scoring." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="backLink" href="/games/">&larr; Back to Games</a>
+
+  <div id="gameRoot">
+    <canvas id="gameCanvas" role="application" aria-label="Coin Flick tabletop"></canvas>
+
+    <div class="hud">
+      <div class="scoreboard" role="status" aria-label="Scoreboard">
+        <div class="score">
+          <div class="label">Player</div>
+          <div><span id="playerScore" class="value">0</span><span class="max">/6</span></div>
+        </div>
+        <div class="centerTitle">COIN FLICK</div>
+        <div class="score">
+          <div class="label">AI</div>
+          <div><span id="aiScore" class="value">0</span><span class="max">/6</span></div>
+        </div>
+      </div>
+
+      <div id="toast" class="toast" aria-live="polite"></div>
+
+      <div class="bottomLeft" aria-label="Table stakes">
+        <div class="chip"><span class="k">Ante</span><span id="anteVal" class="v">1</span></div>
+        <div class="chip"><span class="k">Pot</span><span id="potVal" class="v">12</span></div>
+      </div>
+
+      <div class="bottomRight" aria-label="Controls">
+        <button id="newMatchBtn" type="button">New Match</button>
+        <button id="projBtn" type="button" class="toggleOn">Power Projection: On</button>
+        <button id="soundBtn" type="button" class="toggleOn">Sound: On</button>
+      </div>
+
+      <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Match result">
+        <div class="overlayCard">
+          <h2 id="overlayTitle">Game Over</h2>
+          <p id="overlaySub">&nbsp;</p>
+          <div class="overlayBtns">
+            <button id="playAgainBtn" type="button">Play Again (New Seed)</button>
+            <button id="rematchBtn" type="button">Rematch (Same Seed)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
 
