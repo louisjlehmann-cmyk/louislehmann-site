@@ -426,6 +426,29 @@
       border-bottom: 1px solid var(--color-border-subtle);
     }
 
+    .resume-header-top {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-5);
+      margin-bottom: var(--sp-3);
+    }
+
+    .profile-photo {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--color-border);
+      box-shadow: var(--shadow-m);
+      flex-shrink: 0;
+    }
+
+    .resume-header-text {
+      flex: 1;
+      min-width: 0;
+    }
+
     .resume-name {
       font-size: var(--fs-hero);
       font-weight: 800;
@@ -716,6 +739,8 @@
         display: block;
       }
 
+      .resume-header-top { gap: 12pt; }
+      .profile-photo { width: 56pt; height: 56pt; box-shadow: none; }
       .resume-name { font-size: 18pt; }
       .resume-role { font-size: 12pt; color: #333; }
       .resume-contact { font-size: 9pt; color: #555; }
@@ -1129,9 +1154,14 @@
     /* Main content */
     els.content.innerHTML =
       '<div class="resume-header">' +
-        '<h1 class="resume-name">' + esc(d.name) + '</h1>' +
-        '<div class="resume-role">' + esc(d.title) + '</div>' +
-        '<div class="resume-contact">' + contactHtml + '</div>' +
+        '<div class="resume-header-top">' +
+          '<img class="profile-photo" src="../assets/img/deadpool.png" alt="Louis Lehmann" />' +
+          '<div class="resume-header-text">' +
+            '<h1 class="resume-name">' + esc(d.name) + '</h1>' +
+            '<div class="resume-role">' + esc(d.title) + '</div>' +
+            '<div class="resume-contact">' + contactHtml + '</div>' +
+          '</div>' +
+        '</div>' +
         '<div class="badge-row">' + badgesHtml + '</div>' +
       '</div>' +
 
